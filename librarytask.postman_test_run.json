@@ -1,0 +1,25 @@
+{
+	"id": "ed3f80e0-174f-49f8-a6a5-76327554ee1a",
+	"name": "librarytask",
+	"timestamp": "2025-01-09T14:19:11.726Z",
+	"collection_id": "31589511-2ffe53b2-bb34-4d4c-91ba-34fd06e7733d",
+	"folder_id": 0,
+	"environment_id": "0",
+	"totalPass": 0,
+	"delay": 0,
+	"persist": true,
+	"status": "error",
+	"startedAt": "2025-01-09T14:19:11.190Z",
+	"totalFail": 0,
+	"results": [],
+	"count": 3,
+	"totalTime": 0,
+	"collection": {
+		"requests": [
+			{
+				"id": "6df0b76a-1115-4bd1-b9ee-6695be5b80c1",
+				"method": "POST"
+			}
+		]
+	}
+}
