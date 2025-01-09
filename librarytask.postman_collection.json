@@ -1,0 +1,184 @@
+{
+	"info": {
+		"_postman_id": "2ffe53b2-bb34-4d4c-91ba-34fd06e7733d",
+		"name": "librarytask",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31589511"
+	},
+	"item": [
+		{
+			"name": "get book byid",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://rahulshettyacademy.com/Library/GetBook.php?ID={{NewID}}",
+					"protocol": "https",
+					"host": [
+						"rahulshettyacademy",
+						"com"
+					],
+					"path": [
+						"Library",
+						"GetBook.php"
+					],
+					"query": [
+						{
+							"key": "ID",
+							"value": "{{NewID}}"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "new book",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"let newColor = pm.variables.replaceIn('{{$randomColor}}')\r",
+							"let newMonth = pm.variables.replaceIn('{{$randomMonth}}')\r",
+							"\r",
+							"let ISBNNumber = pm.variables.replaceIn('{{$randomInt}}')\r",
+							"let FullName= pm.variables.replaceIn('{{$randomFullName}}')\r",
+							"\r",
+							"\r",
+							"let AISLENumber =pm.variables.replaceIn('{{$randomInt}}')\r",
+							"\r",
+							"pm.collectionVariables.set(\"NewBookName\",newColor+\" \"+newMonth)\r",
+							"\r",
+							"pm.collectionVariables.set(\"NewISBNNumber\",ISBNNumber)\r",
+							"pm.collectionVariables.set(\"NewAisleNumber\",AISLENumber*16)\r",
+							"pm.collectionVariables.set(\"Auther\",FullName)"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let myResponse=pm.response.json()\r",
+							"let id=myResponse.ID\r",
+							"console.log(id)\r",
+							"pm.collectionVariables.set('NewID',id)"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"name\":\"{{NewBookName}}\",\r\n\"isbn\":\"{{NewISBNNumber}}\",\r\n\"aisle\":\"{{NewAisleNumber}}\",\r\n\"author\":\"{{Auther}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://rahulshettyacademy.com/Library/Addbook.php",
+					"protocol": "https",
+					"host": [
+						"rahulshettyacademy",
+						"com"
+					],
+					"path": [
+						"Library",
+						"Addbook.php"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete book by id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"ID\" : \"{{NewID}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://rahulshettyacademy.com/Library/DeleteBook.php",
+					"protocol": "https",
+					"host": [
+						"rahulshettyacademy",
+						"com"
+					],
+					"path": [
+						"Library",
+						"DeleteBook.php"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"\r",
+					"\r",
+					"\r",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "NewBookName",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "NewISBNNumber",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "NewAisleNumber",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "Auther",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "NewID",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
